@@ -1,8 +1,14 @@
 import classes from './Panel.module.scss';
 import Menu from '../assets/Menu.svg';
 import { useState } from 'react';
+// import { Button } from '../../Button';
+import { FileUploader } from '../../FileUploader/index';
 
-export const Panel = () => {
+interface PanelProps {
+  onFileLoad: (content: string) => void;
+}
+
+export const Panel = ({ onFileLoad }: PanelProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <>
@@ -12,7 +18,9 @@ export const Panel = () => {
         onClick={() => setIsOpen((prev) => !prev)}
       ></img>
       <div className={`${classes.mainDiv} ${isOpen ? classes.open : ''}`}>
-        Panel!
+        <div className={classes.innerContainer}>
+          <FileUploader onFileLoad={onFileLoad} />
+        </div>
       </div>
     </>
   );

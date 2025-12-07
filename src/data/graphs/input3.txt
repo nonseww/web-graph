@@ -1,0 +1,11 @@
+directed
+1: (2, 3, a) (3, 1, x)
+2: (4, 2, b)
+3: (3, 7, loop)
+4: (5, 5, c)
+5: (6, 2, d) (1, 1, back)
+6: No edges
+7: (1, 9, start)
+8: (7, 4, link)
+9: (5, 3, new)
+10: No edges

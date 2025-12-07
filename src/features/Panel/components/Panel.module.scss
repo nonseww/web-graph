@@ -17,18 +17,28 @@
 }
 
 .mainDiv {
-  width: 30vw;
-  height: 400px;
+  width: min(70vw, 400px);
+  height: min(60vh, 400px);
   z-index: 999;
   position: fixed;
-  background-color: #ebebeb;
+  background-color: #f3f3f3;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  top: 65px;
-  left: 20px;
+  top: 70px;
+  left: 30px;
   transform: translateX(-110%);
   transition: transform 0.3s ease;
+  display: grid;
+  place-items: center;
 }
 
 .mainDiv.open {
   transform: translateX(0);
+}
+
+.innerContainer {
+  width: 90%;
+  height: 90%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }

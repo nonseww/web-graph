@@ -1,0 +1,11 @@
+directed
+1: (2, 0, no label) (3, 0, no label)
+2: (4, 0, no label) (5, 0, no label)
+3: (6, 0, no label)
+4: No edges
+5: No edges
+6: (7, 0, no label)
+7: No edges
+8: No edges
+9: No edges
+10: No edges
