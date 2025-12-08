@@ -8,7 +8,6 @@
   z-index: 1000;
   background-color: inherit;
   transition: background-color 0.3s ease;
-  border-radius: 5px;
   padding: 3px;
 
   &:hover {
@@ -21,7 +20,7 @@
   height: min(60vh, 400px);
   z-index: 999;
   position: fixed;
-  background-color: #f3f3f3;
+  background-color: #ebe3da;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   top: 70px;
   left: 30px;
@@ -29,6 +28,7 @@
   transition: transform 0.3s ease;
   display: grid;
   place-items: center;
+  border: 1px #000000 solid;
 }
 
 .mainDiv.open {
@@ -41,4 +41,5 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }

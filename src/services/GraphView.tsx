@@ -2,11 +2,11 @@ import { useEffect, useRef } from 'react';
 import { Network } from 'vis-network';
 import 'vis-network/styles/vis-network.css';
 import type { GraphJSON } from '../lib/graph/types.ts';
-import { PASTEL_COLORS } from '../data/node_colors.ts';
+import { pastelColors } from '../data/node_colors.ts';
 
 const getRandomColor = (): string => {
-  const index = Math.floor(Math.random() * PASTEL_COLORS.length);
-  return PASTEL_COLORS[index];
+  const index = Math.floor(Math.random() * pastelColors.length);
+  return pastelColors[index];
 };
 
 export const GraphView = ({ nodes, edges, directed }: GraphJSON) => {

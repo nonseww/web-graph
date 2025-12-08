@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import classes from './FileUploader.module.scss';
 
 interface FileUploaderProps {
   onFileLoad: (content: string) => void;
@@ -25,7 +26,9 @@ export const FileUploader = ({ onFileLoad }: FileUploaderProps) => {
 
   return (
     <>
-      <button onClick={handleClick}>Загрузить граф</button>
+      <button className={classes.btn} onClick={handleClick}>
+        Загрузить граф
+      </button>
       <input
         ref={inputRef}
         type="file"

@@ -1,4 +1,4 @@
-import { Main } from "./features/pages/Main";
+import { Main } from './features/pages/Main';
 
 function App() {
   return <Main />;
