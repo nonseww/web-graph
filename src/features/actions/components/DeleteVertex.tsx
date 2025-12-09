@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Dialog } from '../../Dialog';
 import { deleteVertex, getGraphJSON } from '../../../lib/graph';
 import type { GraphJSON } from '../../../lib/graph/types';
+import { useNotify } from '../../../hooks/useNotify';
 
 interface DeleteVertexProps {
   onClose: () => void;
@@ -10,14 +11,23 @@ interface DeleteVertexProps {
 
 export const DeleteVertex = ({ onClose, onUpdate }: DeleteVertexProps) => {
   const [value, setValue] = useState('');
+  const { notify } = useNotify();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log(value);
-    await deleteVertex({ id: value });
-    const json = await getGraphJSON();
-    console.log('json', json);
-    onUpdate(json);
+    const success = await deleteVertex({ id: value });
+    if (!success) {
+      notify({ type: 'error', message: `Вершина (${value}) не существует!` });
+    } else {
+      const json = await getGraphJSON();
+      console.log('json', json);
+      onUpdate(json);
+      notify({
+        type: 'success',
+        message: `Вершина (${value}) успешно удалена`,
+      });
+    }
     onClose();
   };
 

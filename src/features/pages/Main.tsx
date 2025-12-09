@@ -4,11 +4,14 @@ import { GraphView } from '../../services/GraphView';
 import type { Vertex, Edge, GraphJSON } from '../../lib/graph/types';
 import { Panel } from '../Panel/index';
 import { convertToGraphString } from '../../utils/convertToGraphString';
+import { Popup } from '../reactions/components/Popup';
+import { useNotify } from '../../hooks/useNotify';
 
 export const Main = () => {
   const [nodes, setNodes] = useState<Vertex[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
   const [directed, setDirected] = useState<boolean>(false);
+  const { notification, clear } = useNotify();
 
   const onUpdate = (json: GraphJSON | null) => {
     setNodes(json?.nodes ?? []);
@@ -69,6 +72,13 @@ export const Main = () => {
     <main>
       <Panel onFileLoad={handleFileLoad} onUpdate={onUpdate} />
       <GraphView nodes={nodes} edges={edges} directed={directed} />
+      {notification.type && (
+        <Popup
+          type={notification.type}
+          message={notification?.message}
+          onClose={clear}
+        />
+      )}
     </main>
   );
 };

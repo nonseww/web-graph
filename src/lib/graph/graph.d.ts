@@ -15,10 +15,10 @@ declare module './graph.js' {
   export function loadUndirectedGraph(fileContent: string): Promise<void>;
   export function getGraphJSON(): Promise<GraphJSON | null>;
   export function deleteGraph(): Promise<void>;
-  export function addVertex(v: Vertex): Promise<void>;
-  export function addEdge(e: Edge): Promise<void>;
-  export function deleteVertex(v: Vertex): Promise<void>;
-  export function deleteEdge(v: Vertex, u: Vertex): Promise<void>;
+  export function addVertex(v: Vertex): Promise<boolean>;
+  export function addEdge(e: Edge): Promise<boolean>;
+  export function deleteVertex(v: Vertex): Promise<boolean>;
+  export function deleteEdge(v: Vertex, u: Vertex): Promise<boolean>;
   export function getOutdegree(v: Vertex): Promise<number>;
   export function getIndegree(v: Vertex): Promise<number>;
   export function getDegree(v: Vertex): Promise<number>;

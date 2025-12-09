@@ -66,32 +66,41 @@ export const deleteGraph = async (): Promise<void> => {
   module._delete_graph();
 };
 
-export const addVertex = async (v: Vertex): Promise<void> => {
+export const addVertex = async (v: Vertex): Promise<boolean> => {
   const module = await initGraph();
   const ptr = toChar(module, v.id);
-  module._add_vertex(ptr);
+  const answer: boolean = module._add_vertex(ptr);
   module._free(ptr);
+  return answer;
 };
 
-export const addEdge = async (e: Edge): Promise<void> => {
+export const addEdge = async (e: Edge): Promise<boolean> => {
   const module = await initGraph();
   const ptrs = toCharAny(module, [e.source, e.target, e.label || '']);
-  module._add_edge(ptrs[0], ptrs[1], e.weight || 0, ptrs[2]);
+  const answer: boolean = module._add_edge(
+    ptrs[0],
+    ptrs[1],
+    e.weight || 0,
+    ptrs[2]
+  );
   ptrs.forEach((ptr) => module._free(ptr));
+  return answer;
 };
 
-export const deleteVertex = async (v: Vertex): Promise<void> => {
+export const deleteVertex = async (v: Vertex): Promise<boolean> => {
   const module = await initGraph();
   const ptr = toChar(module, v.id);
-  module._delete_vertex(ptr);
+  const answer = module._delete_vertex(ptr);
   module._free(ptr);
+  return answer;
 };
 
-export const deleteEdge = async (v: Vertex, u: Vertex): Promise<void> => {
+export const deleteEdge = async (v: Vertex, u: Vertex): Promise<boolean> => {
   const module = await initGraph();
   const ptrs = toCharAny(module, [v.id, u.id]);
-  module._delete_edge(ptrs[0], ptrs[1]);
+  const answer = module._delete_edge(ptrs[0], ptrs[1]);
   ptrs.forEach((ptr) => module._free(ptr));
+  return answer;
 };
 
 export const getOutdegree = async (v: Vertex): Promise<number> => {

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Dialog } from '../../Dialog';
 import { deleteEdge, getGraphJSON } from '../../../lib/graph';
 import type { GraphJSON } from '../../../lib/graph/types';
+import { useNotify } from '../../../hooks/useNotify';
 
 interface DeleteEdgeProps {
   onClose: () => void;
@@ -11,13 +12,22 @@ interface DeleteEdgeProps {
 export const DeleteEdge = ({ onClose, onUpdate }: DeleteEdgeProps) => {
   const [v, setV] = useState<string>('');
   const [u, setU] = useState<string>('');
+  const { notify } = useNotify();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log(v, u);
-    await deleteEdge({ id: v }, { id: u });
-    const json = await getGraphJSON();
-    onUpdate(json);
+    const success = await deleteEdge({ id: v }, { id: u });
+    if (!success) {
+      notify({ type: 'error', message: `Ребро (${v}, ${u}) не существует!` });
+    } else {
+      const json = await getGraphJSON();
+      onUpdate(json);
+      notify({
+        type: 'success',
+        message: `Ребро (${v}, ${u}) успешно удалено`,
+      });
+    }
     onClose();
   };
 

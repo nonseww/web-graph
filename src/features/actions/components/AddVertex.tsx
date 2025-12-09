@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Dialog } from '../../Dialog';
 import { addVertex, getGraphJSON } from '../../../lib/graph';
 import type { GraphJSON } from '../../../lib/graph/types';
+import { useNotify } from '../../../hooks/useNotify';
 
 interface AddVertexProps {
   onClose: () => void;
@@ -10,16 +11,21 @@ interface AddVertexProps {
 
 export const AddVertex = ({ onClose, onUpdate }: AddVertexProps) => {
   const [value, setValue] = useState('');
+  const { notify } = useNotify();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(value);
-    const js0 = await getGraphJSON();
-    console.log('bef', js0);
-    await addVertex({ id: value });
-    const json = await getGraphJSON();
-    console.log('json', json);
-    onUpdate(json);
+    const success = await addVertex({ id: value });
+    if (!success) {
+      notify({ type: 'error', message: `Вершина (${value})  уже существует!` });
+    } else {
+      const json = await getGraphJSON();
+      onUpdate(json);
+      notify({
+        type: 'success',
+        message: `Вершина ${value} успешно добавлена`,
+      });
+    }
     onClose();
   };
 

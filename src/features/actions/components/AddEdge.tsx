@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Dialog } from '../../Dialog';
 import { addEdge, getGraphJSON } from '../../../lib/graph';
 import type { GraphJSON } from '../../../lib/graph/types';
+import { useNotify } from '../../../hooks/useNotify';
 
 interface AddEdgeProps {
   onClose: () => void;
@@ -13,13 +14,27 @@ export const AddEdge = ({ onClose, onUpdate }: AddEdgeProps) => {
   const [u, setU] = useState<string>('');
   const [w, setW] = useState<number | undefined>(undefined);
   const [l, setL] = useState<string>('');
+  const { notify } = useNotify();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log(v, u, w, l);
-    await addEdge({ source: v, target: u, weight: w, label: l });
-    const json = await getGraphJSON();
-    onUpdate(json);
+    const success = await addEdge({
+      source: v,
+      target: u,
+      weight: w,
+      label: l,
+    });
+    if (!success) {
+      notify({ type: 'error', message: `Ребро (${v}, ${u}) уже существует!` });
+    } else {
+      const json = await getGraphJSON();
+      onUpdate(json);
+      notify({
+        type: 'success',
+        message: `Ребро (${v}, ${u}) успешно добавлено`,
+      });
+    }
     onClose();
   };
 

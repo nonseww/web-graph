@@ -1,0 +1,70 @@
+@keyframes render {
+  0% {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+}
+
+.mainWindow {
+  width: min(80vw, 400px);
+  min-height: min(5vh, 200px);
+  height: auto;
+  background-color: #ebe3da;
+  border: 1px solid #000;
+  position: absolute;
+  z-index: 999;
+  bottom: 5%;
+  right: 3%;
+  place-items: center;
+  display: grid;
+  opacity: 0;
+  transform: translateX(100%);
+  animation: render 0.4s ease forwards;
+}
+
+.inner {
+  padding-block: 10px;
+  height: auto;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 30px;
+  margin: 0;
+  margin-top: 10px;
+}
+
+.btn {
+  width: 40%;
+  margin-inline: auto 5%;
+}
+
+.message {
+  font-size: 20px;
+  margin: 0;
+  margin-block: 25px;
+}
+
+@media screen and (max-width: 468px) {
+  .title {
+    font-size: 25px;
+    margin-top: 5px;
+  }
+
+  .btn {
+    font-size: 15px;
+  }
+
+  .message {
+    margin-block: 10px;
+  }
+}
