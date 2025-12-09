@@ -1,28 +1,46 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import * as graph from '../../lib/graph/index';
 import { GraphView } from '../../services/GraphView';
-import type { Vertex, Edge } from '../../lib/graph/types';
+import type { Vertex, Edge, GraphJSON } from '../../lib/graph/types';
 import { Panel } from '../Panel/index';
+import { convertToGraphString } from '../../utils/convertToGraphString';
 
 export const Main = () => {
   const [nodes, setNodes] = useState<Vertex[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
   const [directed, setDirected] = useState<boolean>(false);
 
-  useEffect(() => {
-    const saved = localStorage.getItem('graph');
-    if (saved) {
-      try {
-        const data = JSON.parse(saved);
-        setNodes(data.nodes || []);
-        setEdges(data.edges || []);
-        setDirected(data.directed || false);
-      } catch (e) {
-        console.error('Ошибка чтения графа!', e);
-        return;
-      }
+  const onUpdate = (json: GraphJSON | null) => {
+    setNodes(json?.nodes ?? []);
+    setEdges(json?.edges ?? []);
+    setDirected(json?.directed ?? false);
+  };
+
+  const assignGraph = useCallback(async (data: any) => {
+    if (data.directed) {
+      await graph.loadDirectedGraph(convertToGraphString(data));
+    } else {
+      await graph.loadUndirectedGraph(convertToGraphString(data));
     }
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      const saved = localStorage.getItem('graph');
+      if (saved) {
+        try {
+          const data = JSON.parse(saved);
+          setNodes(data.nodes || []);
+          setEdges(data.edges || []);
+          setDirected(data.directed || false);
+          await assignGraph(data);
+        } catch (e) {
+          console.error('Ошибка чтения графа!', e);
+          return;
+        }
+      }
+    })();
+  }, [assignGraph]);
 
   useEffect(() => {
     if (nodes.length === 0 && edges.length === 0) return;
@@ -49,7 +67,7 @@ export const Main = () => {
 
   return (
     <main>
-      <Panel onFileLoad={handleFileLoad} />
+      <Panel onFileLoad={handleFileLoad} onUpdate={onUpdate} />
       <GraphView nodes={nodes} edges={edges} directed={directed} />
     </main>
   );

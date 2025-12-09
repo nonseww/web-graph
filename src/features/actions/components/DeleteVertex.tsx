@@ -1,22 +1,20 @@
 import { useState } from 'react';
 import { Dialog } from '../../Dialog';
-import { addVertex, getGraphJSON } from '../../../lib/graph';
+import { deleteVertex, getGraphJSON } from '../../../lib/graph';
 import type { GraphJSON } from '../../../lib/graph/types';
 
-interface AddVertexProps {
+interface DeleteVertexProps {
   onClose: () => void;
   onUpdate: (json: GraphJSON | null) => void;
 }
 
-export const AddVertex = ({ onClose, onUpdate }: AddVertexProps) => {
+export const DeleteVertex = ({ onClose, onUpdate }: DeleteVertexProps) => {
   const [value, setValue] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log(value);
-    const js0 = await getGraphJSON();
-    console.log('bef', js0);
-    await addVertex({ id: value });
+    await deleteVertex({ id: value });
     const json = await getGraphJSON();
     console.log('json', json);
     onUpdate(json);
@@ -24,8 +22,8 @@ export const AddVertex = ({ onClose, onUpdate }: AddVertexProps) => {
   };
 
   return (
-    <Dialog onClose={onClose} title="+ Вершина">
-      <p>Введите имя новой вершины:</p>
+    <Dialog onClose={onClose} title="- Вершина">
+      <p>Введите имя удаляемой вершины:</p>
       <form onSubmit={handleSubmit}>
         <input
           type="text"

@@ -1,31 +1,29 @@
 import { useState } from 'react';
 import { Dialog } from '../../Dialog';
-import { addEdge, getGraphJSON } from '../../../lib/graph';
+import { deleteEdge, getGraphJSON } from '../../../lib/graph';
 import type { GraphJSON } from '../../../lib/graph/types';
 
-interface AddEdgeProps {
+interface DeleteEdgeProps {
   onClose: () => void;
   onUpdate: (json: GraphJSON | null) => void;
 }
 
-export const AddEdge = ({ onClose, onUpdate }: AddEdgeProps) => {
+export const DeleteEdge = ({ onClose, onUpdate }: DeleteEdgeProps) => {
   const [v, setV] = useState<string>('');
   const [u, setU] = useState<string>('');
-  const [w, setW] = useState<number | undefined>(undefined);
-  const [l, setL] = useState<string>('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(v, u, w, l);
-    await addEdge({ source: v, target: u, weight: w, label: l });
+    console.log(v, u);
+    await deleteEdge({ id: v }, { id: u });
     const json = await getGraphJSON();
     onUpdate(json);
     onClose();
   };
 
   return (
-    <Dialog onClose={onClose} title="+ Ребро">
-      <p>Введите новое ребро:</p>
+    <Dialog onClose={onClose} title="- Ребро">
+      <p>Введите удалямое ребро:</p>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -44,22 +42,6 @@ export const AddEdge = ({ onClose, onUpdate }: AddEdgeProps) => {
           value={u}
           placeholder="Вершина 2"
           onChange={(e) => setU(e.target.value)}
-        />
-        <input
-          type="number"
-          id="w-id"
-          name="w-id"
-          value={w}
-          placeholder="Вес (необязательно)"
-          onChange={(e) => setW(Number(e.target.value))}
-        />
-        <input
-          type="text"
-          id="l-id"
-          name="l-id"
-          value={l}
-          placeholder="Метка (необязательно)"
-          onChange={(e) => setL(e.target.value)}
         />
         <button type="submit">OK</button>
       </form>
