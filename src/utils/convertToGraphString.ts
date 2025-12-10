@@ -12,7 +12,7 @@ export const convertToGraphString = (data: {
       .filter((e) => e.source === node.id)
       .map((e) => `(${e.target}, ${e.weight ?? 0}, ${e.label ?? 'no label'})`)
       .join(' ');
-    lines.push(`${node.id}: $${edgeStr || 'No edges'}`);
+    lines.push(`${node.id}: ${edgeStr || 'No edges'}`);
   }
   return lines.join('\n');
 };

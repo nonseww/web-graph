@@ -7,6 +7,7 @@ import { convertToGraphString } from '../../utils/convertToGraphString';
 import { Popup } from '../reactions/index';
 import { useNotify } from '../../hooks/useNotify';
 import { Help } from '../Help';
+import { Download } from '../Download';
 
 export const Main = () => {
   const [nodes, setNodes] = useState<Vertex[]>([]);
@@ -88,6 +89,7 @@ export const Main = () => {
         />
       )}
       <Help />
+      <Download />
     </main>
   );
 };

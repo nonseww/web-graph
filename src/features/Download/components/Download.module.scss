@@ -1,0 +1,12 @@
+.imgBox {
+  position: absolute;
+  right: 20px;
+  top: 80px;
+  z-index: 999;
+  cursor: pointer;
+  padding: 3px;
+
+  &:hover {
+    background-color: #ececec;
+  }
+}
