@@ -20,7 +20,9 @@ export const Popup = ({ type, message, onClose }: PopupProps) => {
       },
       type === 'result' ? 10000 : 3000
     );
-    const audio = new Audio('/notif.mp3');
+    const audio = new Audio(
+      type === 'error' ? 'notif-error.mp3' : '/notif.mp3'
+    );
     audio.play();
 
     return () => clearTimeout(timer);
