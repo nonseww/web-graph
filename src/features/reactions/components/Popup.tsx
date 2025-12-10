@@ -2,6 +2,7 @@ import classes from './Popup.module.scss';
 import { Button } from '../../Button';
 import Alert from '../assets/Alert.svg';
 import { useEffect } from 'react';
+import { useEnterKey } from '../../../hooks/useEnterKey';
 
 interface PopupProps {
   type: 'success' | 'error' | 'result';
@@ -10,6 +11,8 @@ interface PopupProps {
 }
 
 export const Popup = ({ type, message, onClose }: PopupProps) => {
+  useEnterKey(onClose);
+
   useEffect(() => {
     const timer = setTimeout(
       () => {

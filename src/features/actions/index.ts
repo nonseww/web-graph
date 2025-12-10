@@ -4,6 +4,7 @@ import { DeleteVertex } from './components/DeleteVertex';
 import { DeleteEdge } from './components/DeleteEdge';
 import { GetIndegree } from './components/GetIndegree';
 import { GetOutdegree } from './components/GetOutdegree';
+import { GetDegree } from './components/GetDegree';
 
 export {
   AddVertex,
@@ -12,4 +13,5 @@ export {
   DeleteEdge,
   GetIndegree,
   GetOutdegree,
+  GetDegree,
 };

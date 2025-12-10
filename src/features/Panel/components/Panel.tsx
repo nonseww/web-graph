@@ -10,6 +10,7 @@ import {
   DeleteEdge,
   GetIndegree,
   GetOutdegree,
+  GetDegree,
 } from '../../actions';
 import type { GraphJSON } from '../../../lib/graph/types';
 
@@ -27,6 +28,7 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
     deleteEdge: boolean;
     indegree: boolean;
     outdegree: boolean;
+    degree: boolean;
   }>({
     addVertex: false,
     addEdge: false,
@@ -34,6 +36,7 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
     deleteEdge: false,
     indegree: false,
     outdegree: false,
+    degree: false,
   });
 
   return (
@@ -89,6 +92,13 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
             }}
             text="Полустепень исхода"
           />
+          <Button
+            onClick={() => {
+              setIsOpen(false);
+              setOpenAction((prev) => ({ ...prev, degree: true }));
+            }}
+            text="Степень вершины"
+          />
           <Button onClick={() => {}} text="Обращение графа" />
           <Button onClick={() => {}} text="Кратчайшие пути" />
         </div>
@@ -141,6 +151,12 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
           onClose={() =>
             setOpenAction((prev) => ({ ...prev, outdegree: false }))
           }
+        />
+      )}
+
+      {openAction['degree'] && (
+        <GetDegree
+          onClose={() => setOpenAction((prev) => ({ ...prev, degree: false }))}
         />
       )}
     </>
