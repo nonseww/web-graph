@@ -4,14 +4,15 @@ import { GraphView } from '../../services/GraphView';
 import type { Vertex, Edge, GraphJSON } from '../../lib/graph/types';
 import { Panel } from '../Panel/index';
 import { convertToGraphString } from '../../utils/convertToGraphString';
-import { Popup } from '../reactions/components/Popup';
+import { Popup } from '../reactions/index';
 import { useNotify } from '../../hooks/useNotify';
+import { Help } from '../Help';
 
 export const Main = () => {
   const [nodes, setNodes] = useState<Vertex[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
   const [directed, setDirected] = useState<boolean>(false);
-  const { notification, clear } = useNotify();
+  const { notify, notification, clear } = useNotify();
 
   const onUpdate = (json: GraphJSON | null) => {
     setNodes(json?.nodes ?? []);
@@ -37,7 +38,12 @@ export const Main = () => {
           setEdges(data.edges || []);
           setDirected(data.directed || false);
           await assignGraph(data);
+          notify({
+            type: 'success',
+            message: 'Граф успешно загружен из памяти',
+          });
         } catch (e) {
+          notify({ type: 'error', message: 'Ошибка чтения графа!' });
           console.error('Ошибка чтения графа!', e);
           return;
         }
@@ -59,6 +65,7 @@ export const Main = () => {
       await graph.loadUndirectedGraph(fileContent);
       setDirected(false);
     } else {
+      notify({ type: 'error', message: 'Не удалось определить тип графа!' });
       console.error('Не удалось определить тип графа');
       return;
     }
@@ -66,6 +73,7 @@ export const Main = () => {
     const json = await graph.getGraphJSON();
     setNodes(json?.nodes ?? []);
     setEdges(json?.edges ?? []);
+    notify({ type: 'success', message: 'Граф успешно загружен' });
   };
 
   return (
@@ -79,6 +87,7 @@ export const Main = () => {
           onClose={clear}
         />
       )}
+      <Help />
     </main>
   );
 };

@@ -2,7 +2,7 @@ import { createContext, useState } from 'react';
 import type { ReactNode } from 'react';
 
 interface Notification {
-  type: 'success' | 'error' | null;
+  type: 'success' | 'error' | 'result' | null;
   message: string | null;
 }
 

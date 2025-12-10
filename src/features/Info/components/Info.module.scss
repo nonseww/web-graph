@@ -2,13 +2,15 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
-  position: absolute;
   z-index: 9999;
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
 }
 
 .dialogWindow {
-  width: min(70vw, 500px);
-  height: min(50vh, 350px);
+  width: min(80vw, 600px);
+  height: min(70vh, 500px);
   background-color: #ebe3da;
   border: 1px #000 solid;
   position: absolute;
@@ -19,7 +21,7 @@
 }
 
 .inner {
-  padding: 15px;
+  padding: 15px 30px;
   height: 100%;
   box-sizing: border-box;
   position: relative;
@@ -38,27 +40,7 @@
 
 .title {
   text-align: center;
-  font-size: 30px;
-}
-
-.child {
-  display: flex;
-  flex-direction: column;
-  margin-block: auto 10%;
-}
-
-p {
-  font-size: 25px;
-}
-
-input[type='text'],
-[type='number'] {
-  border-radius: 5px;
-  height: 30px;
-  font-size: 20px;
-  padding-left: 15px;
-  width: 80%;
-  margin-bottom: 5%;
+  font-size: 35px;
 }
 
 button[type='submit'] {

@@ -1,0 +1,15 @@
+.imgBox {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 999;
+  cursor: pointer;
+  padding: 3px;
+
+  &:hover {
+    background-color: #ececec;
+  }
+}
+
+.helpSvg {
+}

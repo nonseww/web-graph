@@ -41,6 +41,7 @@
   font-size: 30px;
   margin: 0;
   margin-top: 10px;
+  display: inline-block;
 }
 
 .btn {
@@ -52,6 +53,27 @@
   font-size: 20px;
   margin: 0;
   margin-block: 25px;
+}
+
+.errorBox {
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+}
+
+@keyframes alert-appear {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.alert {
+  opacity: 0;
+  animation: alert-appear 0.3s 0.35s ease forwards;
 }
 
 @media screen and (max-width: 468px) {

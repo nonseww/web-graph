@@ -3,7 +3,14 @@ import Menu from '../assets/Menu.svg';
 import { useState } from 'react';
 import { Button } from '../../Button';
 import { FileUploader } from '../../FileUploader/index';
-import { AddVertex, AddEdge, DeleteVertex, DeleteEdge } from '../../actions';
+import {
+  AddVertex,
+  AddEdge,
+  DeleteVertex,
+  DeleteEdge,
+  GetIndegree,
+  GetOutdegree,
+} from '../../actions';
 import type { GraphJSON } from '../../../lib/graph/types';
 
 interface PanelProps {
@@ -18,11 +25,15 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
     addEdge: boolean;
     deleteVertex: boolean;
     deleteEdge: boolean;
+    indegree: boolean;
+    outdegree: boolean;
   }>({
     addVertex: false,
     addEdge: false,
     deleteVertex: false,
     deleteEdge: false,
+    indegree: false,
+    outdegree: false,
   });
 
   return (
@@ -64,6 +75,20 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
             }}
             text="- Ребро"
           />
+          <Button
+            onClick={() => {
+              setIsOpen(false);
+              setOpenAction((prev) => ({ ...prev, indegree: true }));
+            }}
+            text="Полустепень захода"
+          />
+          <Button
+            onClick={() => {
+              setIsOpen(false);
+              setOpenAction((prev) => ({ ...prev, outdegree: true }));
+            }}
+            text="Полустепень исхода"
+          />
           <Button onClick={() => {}} text="Обращение графа" />
           <Button onClick={() => {}} text="Кратчайшие пути" />
         </div>
@@ -100,6 +125,22 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
             setOpenAction((prev) => ({ ...prev, deleteEdge: false }))
           }
           onUpdate={onUpdate}
+        />
+      )}
+
+      {openAction['indegree'] && (
+        <GetIndegree
+          onClose={() =>
+            setOpenAction((prev) => ({ ...prev, indegree: false }))
+          }
+        />
+      )}
+
+      {openAction['outdegree'] && (
+        <GetOutdegree
+          onClose={() =>
+            setOpenAction((prev) => ({ ...prev, outdegree: false }))
+          }
         />
       )}
     </>

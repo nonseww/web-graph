@@ -15,6 +15,21 @@ export const GraphView = ({ nodes, edges, directed }: GraphJSON) => {
   useEffect(() => {
     if (!containerRef.current) return;
 
+    const uniqueEdges = [];
+    const seen = new Set();
+
+    for (const e of edges) {
+      const a = e.source;
+      const b = e.target;
+
+      const key = directed ? `${a}->${b}` : [a, b].sort().join('--');
+
+      if (!seen.has(key)) {
+        seen.add(key);
+        uniqueEdges.push(e);
+      }
+    }
+
     const data = {
       nodes: nodes.map((v) => ({
         id: v.id,
@@ -22,7 +37,7 @@ export const GraphView = ({ nodes, edges, directed }: GraphJSON) => {
         shape: 'ellipse',
         color: getRandomColor(),
       })),
-      edges: edges.map((e) => ({
+      edges: uniqueEdges.map((e) => ({
         from: e.source,
         to: e.target,
         label: (() => {
@@ -42,7 +57,7 @@ export const GraphView = ({ nodes, edges, directed }: GraphJSON) => {
         enabled: true,
         stabilization: true,
         barnesHut: {
-          gravitationalConstant: -10000,
+          gravitationalConstant: -5000,
           centralGravity: 0.3,
           springLength: 400,
         },
