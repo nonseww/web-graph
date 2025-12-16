@@ -1,0 +1,29 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view {
+  position: relative;
+  border-radius: 12px;
+  padding: 24px;
+  width: min(90vw, 600px);
+  height: min(60vh, 500px);
+  background-color: #fffaf1;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.view__x {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  cursor: pointer;
+  width: 26px;
+  height: 26px;
+}

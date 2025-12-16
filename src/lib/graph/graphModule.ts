@@ -5,7 +5,7 @@ import type {
   Edge,
   ShortestPath,
   EccentricityResult,
-  FLowGraph,
+  FlowGraph,
 } from './types';
 
 let wasmInstance: any = null;
@@ -168,14 +168,14 @@ export const eccCenterRaduis = async (): Promise<EccentricityResult | null> => {
 
 export const shortestPaths = async (
   v: string
-): Promise<ShortestPath | null> => {
+): Promise<ShortestPath[] | null> => {
   const module = await initGraph();
   const ptr = toChar(module, v);
   const result = module._shortest_paths(ptr);
   module._free(ptr);
   if (!result) return null;
   const jsonStr = module.UTF8ToString(result);
-  return <ShortestPath>toJSON(jsonStr);
+  return toJSON<ShortestPath[]>(jsonStr);
 };
 
 export const is_negcycle_here = async (
@@ -193,12 +193,12 @@ export const is_negcycle_here = async (
 export const maxFlow = async (
   s: Vertex,
   t: Vertex
-): Promise<FLowGraph | null> => {
+): Promise<FlowGraph | null> => {
   const module = await initGraph();
   const ptrs = toCharAny(module, [s.id, t.id]);
   const result = module._max_flow(ptrs[0], ptrs[1]);
   ptrs.forEach((ptr) => module._free(ptr));
   if (!result) return null;
   const jsonStr = module.UTF8ToString(result);
-  return <FLowGraph>toJSON(jsonStr);
+  return <FlowGraph>toJSON(jsonStr);
 };

@@ -80,7 +80,9 @@ export const Main = () => {
   return (
     <main>
       <Panel onFileLoad={handleFileLoad} onUpdate={onUpdate} />
-      <GraphView nodes={nodes} edges={edges} directed={directed} />
+      <div style={{ height: '99vh' }}>
+        <GraphView nodes={nodes} edges={edges} directed={directed} />
+      </div>
       {notification.type && (
         <Popup
           type={notification.type}

@@ -5,6 +5,8 @@ import { DeleteEdge } from './components/DeleteEdge';
 import { GetIndegree } from './components/GetIndegree';
 import { GetOutdegree } from './components/GetOutdegree';
 import { GetDegree } from './components/GetDegree';
+import { Reverse } from './components/Reverse';
+import { ShortestPaths } from './components/ShortestPaths';
 
 export {
   AddVertex,
@@ -14,4 +16,6 @@ export {
   GetIndegree,
   GetOutdegree,
   GetDegree,
+  Reverse,
+  ShortestPaths,
 };

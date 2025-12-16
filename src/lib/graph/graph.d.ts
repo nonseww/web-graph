@@ -4,7 +4,7 @@ import type {
   Edge,
   ShortestPath,
   EccentricityResult,
-  FLowGraph,
+  FlowGraph,
 } from './types';
 
 declare module './graph.js' {
@@ -27,7 +27,7 @@ declare module './graph.js' {
   export function findUnreachable(v: Vertex): Promise<string[] | null>;
   export function kruskal(): Promise<GraphJSON | null>;
   export function eccCenterRaduis(): Promise<EccentricityResult | null>;
-  export function shortestPaths(v: string): Promise<ShortestPath | null>;
+  export function shortestPaths(v: string): Promise<ShortestPath[] | null>;
   export function is_negcycle_here(start: string): Promise<string[] | null>;
   export function maxFlow(s: Vertex, t: Vertex): Promise<FLowGraph | null>;
 }

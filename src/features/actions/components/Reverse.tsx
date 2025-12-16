@@ -1,30 +1,42 @@
 import type { GraphJSON } from '../../../lib/graph/types';
-import { Modal } from '../../Modal';
 import { useState, useEffect } from 'react';
+import { useNotify } from '../../../hooks/useNotify';
+import { reverseGraph } from '../../../lib/graph/graphModule';
+import { MiniGraph } from '../../MiniGraph';
 
 interface ReverseProps {
   onClose: () => void;
-  onUpdate: (json: GraphJSON | null) => void;
 }
 
-export const Reverse = ({ onClose, onUpdate }: ReverseProps) => {
-  const [isOkay, setIsOkay] = useState(false);
-  const [isOpen, setIsOpen] = useState(true);
+export const Reverse = ({ onClose }: ReverseProps) => {
+  const { notify } = useNotify();
+  const [isOpen, setIsOpen] = useState(false);
+  const [revGraph, setRevGraph] = useState<GraphJSON>();
 
   useEffect(() => {
-    if (!isOpen) {
-        if (isOkay) {
-
-        }
-        onClose();
-    }
-  }, [isOkay, isOpen])
+    (async () => {
+      const graph = await reverseGraph();
+      if (graph === null) {
+        notify({ type: 'error', message: 'Ошибка обращения графа!' });
+      } else {
+        notify({ type: 'success', message: 'Граф обращен успешно' });
+        setRevGraph(graph);
+        setIsOpen(true);
+      }
+    })();
+  }, []);
 
   return (
-    <Modal
-      title="Вы уверены, что хотите инвертировать граф?"
-      onClose={() => setIsOpen(false)}
-      onChange={(answer: boolean) => setIsOkay(answer)}
-    />
+    <>
+      {isOpen && (
+        <MiniGraph
+          onClose={() => {
+            onClose();
+            setIsOpen(false);
+          }}
+          graph={revGraph}
+        />
+      )}
+    </>
   );
 };

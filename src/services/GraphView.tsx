@@ -80,7 +80,7 @@ export const GraphView = ({ nodes, edges, directed }: GraphJSON) => {
       ref={containerRef}
       style={{
         width: '100%',
-        height: '98vh',
+        height: '100%',
         border: '1px solid #aaa',
         borderRadius: '8px',
       }}

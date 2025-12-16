@@ -11,6 +11,8 @@ import {
   GetIndegree,
   GetOutdegree,
   GetDegree,
+  Reverse,
+  ShortestPaths,
 } from '../../actions';
 import type { GraphJSON } from '../../../lib/graph/types';
 
@@ -29,6 +31,8 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
     indegree: boolean;
     outdegree: boolean;
     degree: boolean;
+    reverse: boolean;
+    shortest: boolean;
   }>({
     addVertex: false,
     addEdge: false,
@@ -37,6 +41,8 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
     indegree: false,
     outdegree: false,
     degree: false,
+    reverse: false,
+    shortest: false,
   });
 
   return (
@@ -99,8 +105,20 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
             }}
             text="Степень вершины"
           />
-          <Button onClick={() => {}} text="Обращение графа" />
-          <Button onClick={() => {}} text="Кратчайшие пути" />
+          <Button
+            onClick={() => {
+              setIsOpen(false);
+              setOpenAction((prev) => ({ ...prev, reverse: true }));
+            }}
+            text="Обращение графа"
+          />
+          <Button
+            onClick={() => {
+              setIsOpen(false);
+              setOpenAction((prev) => ({ ...prev, shortest: true }));
+            }}
+            text="Кратчайшие пути"
+          />
         </div>
       </div>
 
@@ -157,6 +175,20 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
       {openAction['degree'] && (
         <GetDegree
           onClose={() => setOpenAction((prev) => ({ ...prev, degree: false }))}
+        />
+      )}
+
+      {openAction['reverse'] && (
+        <Reverse
+          onClose={() => setOpenAction((prev) => ({ ...prev, reverse: false }))}
+        />
+      )}
+
+      {openAction['shortest'] && (
+        <ShortestPaths
+          onClose={() =>
+            setOpenAction((prev) => ({ ...prev, shortest: false }))
+          }
         />
       )}
     </>

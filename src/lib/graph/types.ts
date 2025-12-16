@@ -18,8 +18,7 @@ export interface GraphJSON {
 export interface ShortestPath {
   source: string;
   target: string;
-  path: string[];
-  distance: number;
+  distance: number | null;
 }
 
 export interface EccentricityResult {
@@ -39,7 +38,7 @@ export interface FlowEdge {
   flow: number;
 }
 
-export interface FLowGraph {
+export interface FlowGraph {
   graphType: 'flow';
   nodes: FlowNode[];
   edges: FlowEdge[];
