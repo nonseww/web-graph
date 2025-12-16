@@ -5,6 +5,7 @@ import type {
   Edge,
   ShortestPath,
   EccentricityResult,
+  NegCycle,
   FlowGraph,
 } from './types';
 
@@ -180,14 +181,14 @@ export const shortestPaths = async (
 
 export const is_negcycle_here = async (
   start: string
-): Promise<string[] | null> => {
+): Promise<NegCycle | null> => {
   const module = await initGraph();
   const ptr = toChar(module, start);
   const result = module._is_negcycle_here(ptr);
   module._free(ptr);
   if (!result) return null;
   const jsonStr = module.UTF8ToString(result);
-  return <string[]>toJSON(jsonStr);
+  return <NegCycle>toJSON(jsonStr);
 };
 
 export const maxFlow = async (

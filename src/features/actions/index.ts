@@ -11,6 +11,8 @@ import { CheckCycles } from './components/CheckCycles';
 import { FindUnreachable } from './components/FindUreachable';
 import { Kruskal } from './components/Kruskal';
 import { MaxFlow } from './components/MaxFlow';
+import { IsNegCycleHere } from './components/IsNegCycleHere';
+import { EccCenterRaduis } from './components/EccCenterRaduis';
 
 export {
   AddVertex,
@@ -25,5 +27,7 @@ export {
   CheckCycles,
   FindUnreachable,
   Kruskal,
+  EccCenterRaduis,
   MaxFlow,
+  IsNegCycleHere,
 };

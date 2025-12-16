@@ -27,6 +27,11 @@ export interface EccentricityResult {
   center: string[];
 }
 
+export interface NegCycle {
+  hasNegCycle: boolean;
+  cycle: string[];
+}
+
 export interface FlowNode {
   id: string;
 }

@@ -16,7 +16,9 @@ import {
   CheckCycles,
   FindUnreachable,
   Kruskal,
+  EccCenterRaduis,
   MaxFlow,
+  IsNegCycleHere,
 } from '../../actions';
 import type { GraphJSON } from '../../../lib/graph/types';
 
@@ -40,6 +42,8 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
     checkCycles: boolean;
     findUnreachable: boolean;
     kruskal: boolean;
+    centerRad: boolean;
+    negCycle: boolean;
     maxflow: boolean;
   }>({
     addVertex: false,
@@ -54,6 +58,8 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
     checkCycles: false,
     findUnreachable: false,
     kruskal: false,
+    centerRad: false,
+    negCycle: false,
     maxflow: false,
   });
 
@@ -159,6 +165,22 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
           <Button
             onClick={() => {
               setIsOpen(false);
+              setOpenAction((prev) => ({ ...prev, centerRad: true }));
+            }}
+            text="Центр, эксцентриситет, радиус"
+          />
+
+          <Button
+            onClick={() => {
+              setIsOpen(false);
+              setOpenAction((prev) => ({ ...prev, negCycle: true }));
+            }}
+            text="Отрицательный цикл"
+          />
+
+          <Button
+            onClick={() => {
+              setIsOpen(false);
               setOpenAction((prev) => ({ ...prev, maxflow: true }));
             }}
             text="Максимальный поток"
@@ -255,6 +277,22 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
       {openAction['kruskal'] && (
         <Kruskal
           onClose={() => setOpenAction((prev) => ({ ...prev, kruskal: false }))}
+        />
+      )}
+
+      {openAction['centerRad'] && (
+        <EccCenterRaduis
+          onClose={() =>
+            setOpenAction((prev) => ({ ...prev, centerRad: false }))
+          }
+        />
+      )}
+
+      {openAction['negCycle'] && (
+        <IsNegCycleHere
+          onClose={() =>
+            setOpenAction((prev) => ({ ...prev, negCycle: false }))
+          }
         />
       )}
 
