@@ -10,6 +10,7 @@ import { ShortestPaths } from './components/ShortestPaths';
 import { CheckCycles } from './components/CheckCycles';
 import { FindUnreachable } from './components/FindUreachable';
 import { Kruskal } from './components/Kruskal';
+import { MaxFlow } from './components/MaxFlow';
 
 export {
   AddVertex,
@@ -24,4 +25,5 @@ export {
   CheckCycles,
   FindUnreachable,
   Kruskal,
+  MaxFlow,
 };

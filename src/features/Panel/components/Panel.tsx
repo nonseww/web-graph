@@ -16,6 +16,7 @@ import {
   CheckCycles,
   FindUnreachable,
   Kruskal,
+  MaxFlow,
 } from '../../actions';
 import type { GraphJSON } from '../../../lib/graph/types';
 
@@ -39,6 +40,7 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
     checkCycles: boolean;
     findUnreachable: boolean;
     kruskal: boolean;
+    maxflow: boolean;
   }>({
     addVertex: false,
     addEdge: false,
@@ -52,6 +54,7 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
     checkCycles: false,
     findUnreachable: false,
     kruskal: false,
+    maxflow: false,
   });
 
   return (
@@ -152,6 +155,14 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
             }}
             text="Построить остов"
           />
+
+          <Button
+            onClick={() => {
+              setIsOpen(false);
+              setOpenAction((prev) => ({ ...prev, maxflow: true }));
+            }}
+            text="Максимальный поток"
+          />
         </div>
       </div>
 
@@ -244,6 +255,12 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
       {openAction['kruskal'] && (
         <Kruskal
           onClose={() => setOpenAction((prev) => ({ ...prev, kruskal: false }))}
+        />
+      )}
+
+      {openAction['maxflow'] && (
+        <MaxFlow
+          onClose={() => setOpenAction((prev) => ({ ...prev, maxflow: false }))}
         />
       )}
     </>

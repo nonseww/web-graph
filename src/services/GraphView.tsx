@@ -42,7 +42,7 @@ export const GraphView = ({ nodes, edges, directed }: GraphJSON) => {
         to: e.target,
         label: (() => {
           if (e.label && e.weight !== undefined && e.label !== 'no label')
-            return `${e.weight} [${e.label}]`;
+            return `${e.weight} / ${e.label}`;
           if (e.label && e.label !== 'no label') return e.label;
           if (e.weight !== undefined) return String(e.weight);
           return '';

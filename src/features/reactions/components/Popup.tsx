@@ -18,7 +18,7 @@ export const Popup = ({ type, message, onClose }: PopupProps) => {
       () => {
         onClose();
       },
-      type === 'result' ? 10000 : 3000
+      type === 'result' ? 100000 : 3000
     );
     const audio = new Audio(
       type === 'error' ? 'notif-error.mp3' : '/notif.mp3'

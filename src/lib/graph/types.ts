@@ -40,6 +40,12 @@ export interface FlowEdge {
 
 export interface FlowGraph {
   graphType: 'flow';
+  maxflow: number;
   nodes: FlowNode[];
   edges: FlowEdge[];
+}
+
+export interface FlowGraphResult {
+  graph: GraphJSON;
+  maxflow: number;
 }

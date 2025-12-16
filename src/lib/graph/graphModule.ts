@@ -200,5 +200,6 @@ export const maxFlow = async (
   ptrs.forEach((ptr) => module._free(ptr));
   if (!result) return null;
   const jsonStr = module.UTF8ToString(result);
+  console.log('!', jsonStr);
   return <FlowGraph>toJSON(jsonStr);
 };
