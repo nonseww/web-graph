@@ -14,6 +14,8 @@ import {
   Reverse,
   ShortestPaths,
   CheckCycles,
+  FindUnreachable,
+  Kruskal,
 } from '../../actions';
 import type { GraphJSON } from '../../../lib/graph/types';
 
@@ -35,6 +37,8 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
     reverse: boolean;
     shortest: boolean;
     checkCycles: boolean;
+    findUnreachable: boolean;
+    kruskal: boolean;
   }>({
     addVertex: false,
     addEdge: false,
@@ -46,6 +50,8 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
     reverse: false,
     shortest: false,
     checkCycles: false,
+    findUnreachable: false,
+    kruskal: false,
   });
 
   return (
@@ -130,6 +136,22 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
             }}
             text="Проверить на ацикличность"
           />
+
+          <Button
+            onClick={() => {
+              setIsOpen(false);
+              setOpenAction((prev) => ({ ...prev, findUnreachable: true }));
+            }}
+            text="Найти недостижимые"
+          />
+
+          <Button
+            onClick={() => {
+              setIsOpen(false);
+              setOpenAction((prev) => ({ ...prev, kruskal: true }));
+            }}
+            text="Построить остов"
+          />
         </div>
       </div>
 
@@ -208,6 +230,20 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
           onClose={() =>
             setOpenAction((prev) => ({ ...prev, checkCycles: false }))
           }
+        />
+      )}
+
+      {openAction['findUnreachable'] && (
+        <FindUnreachable
+          onClose={() =>
+            setOpenAction((prev) => ({ ...prev, findUnreachable: false }))
+          }
+        />
+      )}
+
+      {openAction['kruskal'] && (
+        <Kruskal
+          onClose={() => setOpenAction((prev) => ({ ...prev, kruskal: false }))}
         />
       )}
     </>

@@ -8,6 +8,8 @@ import { GetDegree } from './components/GetDegree';
 import { Reverse } from './components/Reverse';
 import { ShortestPaths } from './components/ShortestPaths';
 import { CheckCycles } from './components/CheckCycles';
+import { FindUnreachable } from './components/FindUreachable';
+import { Kruskal } from './components/Kruskal';
 
 export {
   AddVertex,
@@ -20,4 +22,6 @@ export {
   Reverse,
   ShortestPaths,
   CheckCycles,
+  FindUnreachable,
+  Kruskal,
 };
