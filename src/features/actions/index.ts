@@ -7,6 +7,7 @@ import { GetOutdegree } from './components/GetOutdegree';
 import { GetDegree } from './components/GetDegree';
 import { Reverse } from './components/Reverse';
 import { ShortestPaths } from './components/ShortestPaths';
+import { CheckCycles } from './components/CheckCycles';
 
 export {
   AddVertex,
@@ -18,4 +19,5 @@ export {
   GetDegree,
   Reverse,
   ShortestPaths,
+  CheckCycles,
 };

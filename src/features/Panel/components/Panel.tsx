@@ -13,6 +13,7 @@ import {
   GetDegree,
   Reverse,
   ShortestPaths,
+  CheckCycles,
 } from '../../actions';
 import type { GraphJSON } from '../../../lib/graph/types';
 
@@ -33,6 +34,7 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
     degree: boolean;
     reverse: boolean;
     shortest: boolean;
+    checkCycles: boolean;
   }>({
     addVertex: false,
     addEdge: false,
@@ -43,6 +45,7 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
     degree: false,
     reverse: false,
     shortest: false,
+    checkCycles: false,
   });
 
   return (
@@ -119,6 +122,14 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
             }}
             text="Кратчайшие пути"
           />
+
+          <Button
+            onClick={() => {
+              setIsOpen(false);
+              setOpenAction((prev) => ({ ...prev, checkCycles: true }));
+            }}
+            text="Проверить на ацикличность"
+          />
         </div>
       </div>
 
@@ -188,6 +199,14 @@ export const Panel = ({ onFileLoad, onUpdate }: PanelProps) => {
         <ShortestPaths
           onClose={() =>
             setOpenAction((prev) => ({ ...prev, shortest: false }))
+          }
+        />
+      )}
+
+      {openAction['checkCycles'] && (
+        <CheckCycles
+          onClose={() =>
+            setOpenAction((prev) => ({ ...prev, checkCycles: false }))
           }
         />
       )}
