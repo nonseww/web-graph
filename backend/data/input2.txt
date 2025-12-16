@@ -1,0 +1,10 @@
+1
+1: (2, 5, road) (3, 10, rail)
+2: (1, 5, road) (4, 2, bridge)
+3: (1, 10, rail) (5, 3, path)
+4: (2, 2, bridge) (6, 1, rope)
+5: (3, 3, path) (6, 4, tunnel)
+6: (4, 1, rope) (5, 4, tunnel)
+7: No edges
+8: No edges
+9: No edges

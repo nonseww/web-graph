@@ -1,0 +1,33 @@
+Max flow = 27
+
+0 -> 1 | flow = 6 / cap = 17
+0 -> 2 | flow = 4 / cap = 5
+0 -> 3 | flow = 17 / cap = 19
+1 -> 4 | flow = 0 / cap = 12
+1 -> 5 | flow = 6 / cap = 6
+2 -> 5 | flow = 0 / cap = 7
+2 -> 6 | flow = 4 / cap = 15
+3 -> 6 | flow = 9 / cap = 10
+3 -> 7 | flow = 8 / cap = 8
+4 -> 8 | flow = 0 / cap = 14
+4 -> 9 | flow = 0 / cap = 12
+5 -> 9 | flow = 0 / cap = 9
+5 -> 10 | flow = 6 / cap = 11
+6 -> 10 | flow = 0 / cap = 5
+6 -> 11 | flow = 13 / cap = 18
+7 -> 11 | flow = 0 / cap = 4
+7 -> 12 | flow = 8 / cap = 16
+8 -> 13 | flow = 0 / cap = 15
+9 -> 13 | flow = 0 / cap = 10
+9 -> 14 | flow = 0 / cap = 7
+10 -> 14 | flow = 0 / cap = 13
+10 -> 15 | flow = 6 / cap = 12
+11 -> 15 | flow = 5 / cap = 9
+11 -> 16 | flow = 8 / cap = 8
+12 -> 16 | flow = 4 / cap = 17
+12 -> 17 | flow = 4 / cap = 6
+13 -> 18 | flow = 0 / cap = 10
+14 -> 18 | flow = 0 / cap = 14
+15 -> 19 | flow = 11 / cap = 11
+16 -> 19 | flow = 12 / cap = 12
+17 -> 19 | flow = 4 / cap = 7
